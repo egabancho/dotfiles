@@ -43,7 +43,7 @@ function install() {
     for file in $files
     do
         echo "Symlinking $file"
-        ln -s $(dirname ${BASH_SOURCE})/$file ~/$file
+        ln -sf $(dirname ${BASH_SOURCE})/$file ~/$file
     done
     source ~/.bash_profile
 }
