@@ -8,7 +8,7 @@ let mapleader=","
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/vundle'
@@ -30,6 +30,8 @@ Plugin 'majutsushi/tagbar'
 " The ultimate snippet solution + default snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+" allows you to use <Tab> for all your insert completion needs
+Plugin 'ervandew/supertab'
 " Much simpler way to use some motions in vim
 Plugin 'Lokaltog/vim-easymotion'
 " All about surroundings: parentheses, brackets, quotes, XML tags
