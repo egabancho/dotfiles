@@ -63,6 +63,9 @@ Plugin 'groenewege/vim-less'
 " Vimscript for gist
 Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
+" tmux integration
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'christoomey/vim-tmux-navigator'
 
 filetype plugin indent on     " required
 filetype on
@@ -310,4 +313,5 @@ set sidescroll=1
 set number
 set relativenumber
 nnoremap <leader>l :set norelativenumber!<CR>
+nnoremap <leader>ll :set invnumber<CR>
 
