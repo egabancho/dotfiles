@@ -11,7 +11,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " Enable tmux integration
-let g:airline#extensions#tmuxline#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 0
 
 " Powerline patched fonts
 let g:airline_powerline_fonts = 1
