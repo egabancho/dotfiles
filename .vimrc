@@ -63,9 +63,16 @@ Plugin 'groenewege/vim-less'
 " Vimscript for gist
 Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
+" Markdown
+Plugin 'tpope/vim-markdown'
 " tmux integration
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'christoomey/vim-tmux-navigator'
+" ACK inside vim
+Plugin 'mileszs/ack.vim'
+"Javascript indentation and syntax support
+Plugin 'pangloss/vim-javascript'
+Plugin 'Shutnik/jshint2.vim'
 
 filetype plugin indent on     " required
 filetype on
