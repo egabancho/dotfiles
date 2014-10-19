@@ -1,0 +1,9 @@
+[user]
+	name = Esteban J. G. Gabancho
+	email = esteban.gabancho@gmail.com
+[github]
+	user = egabancho
+[core]
+	editor = vim
+[color]
+	ui = true
