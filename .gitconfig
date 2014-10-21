@@ -1,9 +1,29 @@
+[filter "media"]
+    clean = git-media-clean %f
+    smudge = git-media-smudge %f
+[grep]
+    linenumber = true
 [user]
-	name = Esteban J. G. Gabancho
-	email = esteban.gabancho@gmail.com
+    name = Esteban J. G. Gabancho
+    email = esteban.gabancho@gmail.com
 [github]
-	user = egabancho
+    user = egabancho
 [core]
-	editor = vim
+    editor = vim
 [color]
-	ui = true
+    ui = true
+[alias]
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
+    df = diff
+    dc = diff --cached
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lc = log ORIG_HEAD.. --stat --no-merges
+    new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+    undo = reset --hard
+    edit-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; vim `f`"
+    add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`"
+    alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
+    aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
