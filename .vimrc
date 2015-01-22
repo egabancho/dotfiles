@@ -143,6 +143,12 @@ set confirm
 " map . in visual mode
 vnoremap . :norm.<cr>
 
+" ================ Copy & paste  =================
+ vmap <C-c> "+yi
+ vmap <C-x> "+c
+ vmap <C-v> c<ESC>"+p
+ imap <C-v> <ESC>"+pa
+
 " ================ Colors  =================
 syntax enable
 set background=dark
