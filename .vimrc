@@ -128,6 +128,8 @@ cmap w!! %!sudo tee > /dev/null %
 " 'tags' file
 " http://vim.wikia.com/wiki/Browsing_programs_with_tags
 set tags=./tags;
+noremap <C-G> <c-]>
+noremap <C-B> <c-T>
 
 " remember cursor and buffers states
 autocmd BufReadPost *
@@ -254,6 +256,10 @@ set nofoldenable        "don't fold by default
 " exist in the background without being in a window.
 set hidden
 set switchbuf=useopen
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
 
 map <leader>[ :bp<CR>
 map <leader>] :bn<CR>
