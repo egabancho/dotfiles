@@ -8,14 +8,15 @@ let mapleader=","
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
-" let Vundle manage Vundle, required
-Plugin 'gmarik/vundle'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 " =============== Plugins ===============
 " Color schemes
-Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
 " Fuzzy file, buffer, mru, tag, etc. finder
 Plugin 'kien/ctrlp.vim'
@@ -76,6 +77,8 @@ Plugin 'Shutnik/jshint2.vim'
 " Better CSS Syntax for Vim
 Plugin 'hail2u/vim-css3-syntax'
 
+" All of your Plugins must be added before the following line
+call vundle#end()
 filetype plugin indent on     " required
 filetype on
 
