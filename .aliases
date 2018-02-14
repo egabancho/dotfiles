@@ -1,0 +1,155 @@
+#!/usr/bin/env bash
+
+# Easy load .bashrc
+alias sbrc='source ~/.bashrc'
+
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+    alias ls='ls --color'
+else # OS X `ls`
+    alias ls='ls -G'
+fi
+
+# List all files and directories colorized in columns
+alias l='ls -CF'
+#Lis all files and directories including hidden in colums
+alias la='ls -A'
+# List all files colorized in long format, including dot files
+alias ll='ls -laF'
+# List only directories
+alias lsd='ls -l -d */'
+# List all by date
+alias lrt='ls -lrt'
+# List hidden files
+alias l.='ls -d .* '
+
+# Add an "alert" alias for long running commands.
+# Use like so: sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Look for directories and files
+alias fd='find . -type d -iname'
+alias ff='find . -type f -iname'
+
+# Use colordiff if possible
+type -P colodiff &>/dev/null && alias diff="colordiff"
+
+# Colorize the grep command output for ease of use (good for log files)
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# Find process by name
+alias got='ps awx | grep'
+
+# Stop after sending count ECHO_REQUEST packets
+alias ping='ping -c 5'
+# Do not wait interval 1 second, go fast
+alias fastping='ping -c 100 -s.2'
+
+# Directories
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# Create directories on demand
+alias mkdir='mkdir -pv'
+
+# This one saved by butt so many times
+alias wget='wget -c'
+
+#Use htop is possible
+type -P htop &>/dev/null &&  alias top="htop"
+
+#Show open ports
+alias ports='netstat -tulanp'
+
+# git
+alias gs='git status'
+alias gstash='git stash save --include-untracked'
+alias go='git checkout'
+alias gc='git commit -S'
+alias gca='git commit --amend -S'
+alias gcad='git commit --amend -S --date=now'
+alias gr='git remote -v'
+alias gru='git remote update'
+alias gpum='git pull upstream master'
+alias gd='git diff -w'
+alias gdc='git diff -w --cached'
+alias gbd='git branch -D'
+alias gbdr='f() { git branch -D $1 && git push origin :$1; }; f'
+
+# Docker
+alias dl="docker ps -l -q"
+alias dps="docker ps"
+alias dpa="docker ps -a"
+alias di="docker images"
+
+alias dcup='docker-compose up'
+alias dcb='docker-compose build'
+alias dcrm='docker-compose rm'
+alias dcps='docker-compose ps'
+alias dcstop='docker-compose stop'
+alias dcrestart='docker-compose restart'
+
+# Virtualenv
+alias v='workon'
+alias v.deactivate='deactivate'
+alias v.mk='mkvirtualenv -p python3.5'
+alias v.rm='rmvirtualenv'
+alias v.cd='cdvirtualenv'
+alias v.set='setprojectdir'
+
+# Shortcuts
+alias d='cd'
+alias h='history'
+alias j='jobs -l'
+alias o='open'
+alias oo='open .'
+alias i='ipython'
+alias k='clear'
+alias path='echo -e ${PATH//:/\\n}'
+alias now='date +"%T"'
+alias nowdate='date +"%d-%m-%Y"'
+
+# For most of the cases Hub is a nice tool to use
+eval "$(hub alias -s)"
+alias g='git'
+
+#Editors
+alias v='vim'
+alias vimnoplugin='vim -u NONE'
+# emacs daemon and macos are not good friends, can't make it run at startup time
+# This function will launch emacsclient, if there is no daemon will create one
+# and if there is one will attach to it.
+function e () {
+    # Checks if there's a frame open
+    emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" 2> /dev/null | grep t &> /dev/null
+
+    if [ "$?" -eq "1" ]; then
+        emacsclient -a '' -nqc "$@" &> /dev/null
+    else
+        emacsclient -nq "$@" &> /dev/null
+    fi
+}
+# alias e='emacsclient -n -c'
+alias ekill="emacsclient -e '(client-save-kill-emacs)'"
+alias eforcekill="emacsclient -e '(kill-emacs)'"
+
+# macos specific aliases
+if [ "$(uname)" == "Darwin" ]; then
+  # brew aliases
+  alias bup='brew update'
+  alias bout='brew outdated'
+  alias bin='brew install'
+  alias brm='brew uninstall'
+  alias bls='brew list'
+  alias bsr='brew search'
+  alias binf='brew info'
+  alias bdr='brew doctor'
+  alias cask='brew cask'
+
+  # Recursively delete `.DS_Store` files
+  alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+fi
