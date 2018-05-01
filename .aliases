@@ -114,7 +114,9 @@ alias now='date +"%T"'
 alias nowdate='date +"%d-%m-%Y"'
 
 # For most of the cases Hub is a nice tool to use
-eval "$(hub alias -s)"
+if type hub &> /dev/null; then
+    eval "$(hub alias -s)"
+fi
 alias g='git'
 
 #Editors
