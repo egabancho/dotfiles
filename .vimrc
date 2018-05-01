@@ -89,7 +89,8 @@ set number                      "Line numbers are good
 set cursorline                  "Line to indicate the cursor location
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set mouse=a                     "Allow mouse in all modes
-set ttymouse=xterm2
+" set ttymouse=xterm2
+set ttymouse=sgr
 set clipboard=unnamedplus       "Support for Mac OS X clipboard
 set pastetoggle=<F2>            "Paste mode
 set history=1000                "Store lots of :cmdline history

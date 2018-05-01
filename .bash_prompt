@@ -1,0 +1,106 @@
+#!/bin/bash
+
+# Shell prompt based on the Solarized Dark theme.
+# Screenshot: http://i.imgur.com/EkEtphC.png
+# Heavily inspired by @necolas’s prompt: https://github.com/necolas/dotfiles
+# And https://github.com/donnemartin/dev-setup
+# iTerm → Profiles → Text → use 13pt Monaco with 1.1 vertical spacing.
+
+export TERM='xterm-256color';
+
+balck="\[\e[0;30m\]"
+red="\[\e[0;31m\]"
+green="\[\e[0;32m\]"
+yellow="\[\e[0;33m\]"
+blue="\[\e[0;34m\]"
+purple="\[\e[0;35m\]"
+cyan="\[\e[0;36m\]"
+white="\[\e[0;37;1m\]"
+orange="\[\e[0;91m\]"
+
+bold_balck="\[\e[30;1m\]"
+bold_red="\[\e[31;1m\]"
+bold_green="\[\e[32;1m\]"
+bold_yellow="\[\e[33;1m\]"
+bold_blue="\[\e[34;1m\]"
+bold_purple="\[\e[35;1m\]"
+bold_cyan="\[\e[36;1m\]"
+bold_white="\[\e[37;1m\]"
+bold_orange="\[\e[91m;1\]"
+
+normal="\[\e[0m\]"
+reset_color="\[\e[39m\]"
+
+function git_prompt() {
+    local p='';
+
+    if [[ -f .git/HEAD ]] || [[ -n "$(git symbolic-ref HEAD 2> /dev/null)" ]]; then
+        p+="± ${green}| ${bold_white}"
+        local ref=$(git symbolic-ref HEAD 2> /dev/null)
+        p+="${ref#refs/heads/} "
+        # Check for uncommitted changes in the index.
+        if ! $(git diff --quiet --ignore-submodules --cached); then
+            p+="${blue}+";
+        fi;
+        # Check for unstaged changes.
+        if ! $(git diff-files --quiet --ignore-submodules --); then
+            p+="${yellow}!";
+        fi;
+
+        # Check for untracked files.
+        if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+            p+="${red}?";
+        fi;
+
+        # Check for stashed files.
+        if $(git rev-parse --verify refs/stash &>/dev/null); then
+            p+="${bold_red}(?)";
+        fi;
+        echo -e "${p}${green} |"
+    else
+        echo -e "○"
+    fi
+}
+
+# Highlight the user name when logged in as root.
+if [[ "${USER}" == "root" ]]; then
+    userStyle="${red}";
+else
+    userStyle="${orange}";
+fi;
+
+# Highlight the hostname when connected via SSH.
+if [[ "${SSH_TTY}" ]]; then
+    hostStyle="${bold_red}";
+else
+    hostStyle="${yellow}";
+fi;
+
+function virtualenv_prompt {
+  if [[ -n "$VIRTUAL_ENV" ]]; then
+    virtualenv=`basename "$VIRTUAL_ENV"`
+    echo -e "${green}(${bold_white}$virtualenv${green}) "
+  fi
+}
+
+function prompt_command() {
+    # Display prompt vim style /usr/local/src -> /u/l/src
+    # local w=$(sed "s:\([^/]\)[^/]*/:\1/:g" <<<$PWD)
+    case "$TERM" in
+        "dumb")
+            PS1="> "
+            ;;
+        xterm*|rxvt*|eterm*|screen*)
+            local w=$(p="${PWD#${HOME}}"; [ "${PWD}" != "${p}" ] && printf "~";IFS=/; for q in ${p:1}; do printf /${q:0:1}; done; printf "${q:1}")
+            PS1="${purple}\u@\h "
+            PS1+="$(virtualenv_prompt)${reset_color}"
+            PS1+="in ${green}${w}${purple} "
+            PS1+="${bold_cyan}$(git_prompt) "
+            PS1+="${yellow}➜${reset_color} "
+            ;;
+        *)
+            PS1="> "
+            ;;
+    esac
+}
+PROMPT_COMMAND=prompt_command;

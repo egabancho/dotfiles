@@ -1,0 +1,94 @@
+# Easy load .bashrc
+alias sbrc='source ~/.bashrc'
+
+# Sudo aliases
+alias sudo='sudo '
+alias _='sudo'
+# Become root
+alias root='sudo -i'
+alias su='sudo -i'
+# reboot / halt / poweroff
+alias reboot='sudo /sbin/reboot'
+alias poweroff='sudo /sbin/poweroff'
+alias halt='sudo /sbin/halt'
+alias shutdown='sudo /sbin/shutdown'
+
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+        alias ls='ls --color'
+        else # OS X `ls`
+                alias ls='ls -G'
+                fi
+
+# List all files and directories colorized in columns
+alias l='ls -CF'
+#Lis all files and directories including hidden in colums
+alias la='ls -A'
+# List all files colorized in long format, including dot files
+alias ll='ls -laF'
+# List only directories
+alias lsd='ls -l -d */'
+# List all by date
+alias lrt='ls -lrt'
+# List hidden files
+alias l.='ls -d .* '
+
+# Use colordiff if possible
+type -P colodiff &>/dev/null && alias diff="colordiff"
+
+# Colorize the grep command output for ease of use (good for log files)
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# Directories
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
+# alias -- -='cd -'
+alias ~='cd ~'
+alias cd..='cd ..'
+
+# Create directories on demand
+alias mkdir='mkdir -pv'
+
+# Remove things
+alias rmr='rm -r'
+alias rmrf='rm -rf'
+
+# This one saved by butt so many times
+alias wget='wget -c'
+
+# Shortcuts
+alias d='cd'
+alias h='history'
+alias j='jobs -l'
+alias o='open'
+alias oo='open .'
+alias i='ipython'
+alias k='clear'
+alias path='echo -e ${PATH//:/\\n}'
+alias now='date +"%T"'
+alias nowdate='date +"%d-%m-%Y"'
+
+# Vim is my default editor
+#http://apple.stackexchange.com/questions/14299/replaced-usr-bin-vim-now-i-get-error-messages
+alias vi='vim'
+alias svi='sudo vi'
+alias vis='vim "+set si"'
+alias edit='vim'
+alias e='vim'
+alias vimnoplugin='vim -u NONE'
+
+alias g='git'
+
+# Stop after sending count ECHO_REQUEST packets
+alias ping='ping -c 5'
+# Do not wait interval 1 second, go fast
+alias fastping='ping -c 100 -s.2'
+
+#Show open ports
+alias ports='netstat -tulanp'
