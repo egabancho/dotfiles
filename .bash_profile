@@ -1,13 +1,12 @@
-# Only load Liquid Prompt in interactive shells, not from a script or from scp
-DOTFILES_HOME=$HOME/Developer/src/dotfiles
-[[ $- = *i* ]] && source $DOTFILES_HOME/liquidprompt/liquidprompt
-
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don’t want to commit.
 for file in $HOME/.{aliases,exports,functions,extra}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
+
+# Only load Liquid Prompt in interactive shells, not from a script or from scp
+[[ $- = *i* ]] && source $DOTFILES_HOME/liquidprompt/liquidprompt
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
