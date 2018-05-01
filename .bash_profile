@@ -18,7 +18,11 @@ shopt -s histappend;
 shopt -s cdspell;
 
 # Add tab completion for many Bash commands
+[ -f /etc/bash_completion ] && . /etc/bash_completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+for file in /etc/bash_completion.d/{yum,git,pip,yum-utils.bash} ; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
+done
 
 # Enable tab completion for `g` by marking it as an alias for `git`
 complete -o default -o nospace -F _git g;
