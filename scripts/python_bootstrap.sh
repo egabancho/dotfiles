@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # Install Python
-brew install python python3
+brew install python@2 python
+brew link python --overwrite
 
 # Install virtual environments globally
 pip2 install virtualenv virtualenvwrapper
@@ -34,12 +35,17 @@ source $EXTRA_PATH
 
 # use pipsi
 curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
-pipsi install ipython
-pipsi install cookiecutter
-pipsi install isort
-pipsi install pygments
-pipsi install autoflake
-pipsi install flake8
-pipsi install hy
-pipsi install yapf
-pipsi install fabric
+pipsi install ipython --python python2
+pipsi install cookiecutter --python python2
+pipsi install isort --python python2
+pipsi install pygments --python python2
+pipsi install autoflake --python python2
+pipsi install flake8 --python python2
+pipsi install hy --python python2
+pipsi install yapf --python python2
+pipsi install fabric --python python2
+# pipsi install aws
+
+# This are libraries, no binaries
+pip install importmagic
+pip install epc
