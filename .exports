@@ -23,3 +23,6 @@ export LESS_TERMCAP_md=$(tput setaf 136);
 
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER='less -X';
+
+# Make gpg always happy
+export GPG_TTY=$(tty)
