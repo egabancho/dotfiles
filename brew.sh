@@ -87,5 +87,8 @@ brew install wifi-password
 # A simple, fast and user-friendly alternative to 'find'
 brew install fd
 
+# Python XMLSec requirement library.
+brew install Libxmlsec1
+
 # Remove outdated versions from the cellar.
 brew cleanup
