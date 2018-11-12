@@ -1,7 +1,7 @@
 [user]
     name = Esteban J. G. Gabancho
     email = esteban.gabancho@gmail.com
-	signingkey = 0F809AC0AF0DA61E
+    signingkey = 0F809AC0AF0DA61E
 
 [alias]
     # View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -130,7 +130,7 @@
     # Include summaries of merged commits in newly created merge commit messages
     log = true
     ff = only
-		conflictstyle = diff3
+    conflictstyle = diff3
 
 [core]
     editor = vim
@@ -163,22 +163,22 @@
 
 [color "diff"]
     meta = yellow bold
-	  commit = green bold
+    commit = green bold
     frag = magenta bold # line info
     old = red bold# deletions
     new = green bold# additions
-	  whitespace = red reverse
+    whitespace = red reverse
 
 [color "diff-highlight"]
     oldNormal = red bold
     oldHighlight = "red bold 52"
     newNormal = green bold
-		newHighlight = "green bold 22"
+    newHighlight = "green bold 22"
 
 [color "status"]
-		added = blue bold
+    added = blue bold
     changed = yellow bold
-		untracked = red bold
+    untracked = red bold
 
 [filter "hawser"]
     clean = git hawser clean %f
@@ -196,5 +196,10 @@
 [commit]
     gpgsign = true
 
-[include]
-    path = .gitconfig_extra
+[magithub]
+    online = false
+
+[magithub "status"]
+    includeStatusHeader = false
+    includePullRequestsSection = false
+    includeIssuesSection = false

@@ -6,7 +6,7 @@ done;
 unset file;
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
-[[ $- = *i* ]] && source $DOTFILES_HOME/liquidprompt/liquidprompt
+[[ $- = *i* ]] && source ~/.liquidprompt/liquidprompt
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
@@ -18,14 +18,16 @@ shopt -s histappend;
 shopt -s cdspell;
 
 # Add tab completion for many Bash commands
-[ -f /etc/bash_completion ] && . /etc/bash_completion
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-for file in /etc/bash_completion.d/{yum,git,pip,yum-utils.bash} ; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file";
-done
+if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+  source "$(brew --prefix)/share/bash-completion/bash_completion";
+elif [ -f /etc/bash_completion ]; then
+  source /etc/bash_completion;
+fi;
 
 # Enable tab completion for `g` by marking it as an alias for `git`
-complete -o default -o nospace -F _git g;
+if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+  complete -o default -o nospace -F _git g;
+fi;
 
 # Enable tab completion for ssh from .ssh/knonw_hosts .ssh/config
 _complete_ssh_hosts ()

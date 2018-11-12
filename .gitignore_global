@@ -46,11 +46,8 @@ Thumbs.db
 # Python #
 ##########
 .pytest_cache
+*.pyc
 
 # JS #
 ######
 node_modules/
-
-# Custom #
-##########
-TODO.org

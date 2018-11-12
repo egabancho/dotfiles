@@ -34,15 +34,20 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     windows-scripts
      ansible
      (auto-completion :variables
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-complete-with-key-sequence nil
+                      auto-completion-complete-with-key-sequence-delay 0.1
+                      auto-completion-private-snippets-directory nil
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-sort-by-usage t
-                      auto-completion-enable-help-tooltip 'manual)
+                      auto-completion-enable-help-tooltip t )
      better-defaults
      docker
      emacs-lisp
+     ess
      (git :variables
           git-link-default-branch "master"
           magit-branch-prefer-remote-upstream t
@@ -50,9 +55,9 @@ This function should only modify configuration layer settings."
           git-commit-fill-column 72
           git-messenger:show-detail t)
      github
+     helm
      (html :variables
            web-mode-markup-indent-offset 2)
-     ivy
      (javascript :variables
                  js2-base-offset 2
                  js-indent-level 2)
@@ -62,7 +67,8 @@ This function should only modify configuration layer settings."
      nginx
      osx
      (org :variables
-          org-enable-github-support t)
+          org-enable-github-support t
+          org-enable-reveal-js-support t)
      (python :variables
              python-sort-imports-on-save t
              python-test-runner 'pytest)
@@ -79,6 +85,7 @@ This function should only modify configuration layer settings."
      typescript
      version-control
      vimscript
+     windows-scripts
      yaml
      )
 
@@ -473,6 +480,14 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  ;; ;; org-mode configuration
+  ;; (with-eval-after-load 'org
+  ;;   ;; org-capture setup
+  ;;   (setq  org-default-notes-file "refile.org")
+  ;;   ;; org-agenda setup
+  ;;   (setq org-agenda-files
+  ;;         (file-expand-wildcards "~/org/*.org"))
+  ;;   )
   )
 
 (defun dotspacemacs/user-config ()
@@ -494,17 +509,67 @@ before packages are loaded."
   ;; alias e='emacsclient -n -t' to your bashrc or similar
   (setq s-pop-up-frames nil)
 
-  ;; Better fuzzy matching support in Ivy
-  ;; a .* regex wild card in place of each single space in the input
-  ;; a .* regex wild card between each input letter
-  (setq ivy-re-builders-alist
-        '((ivy-switch-buffer . ivy--regex-plus)
-          (t . ivy--regex-fuzzy)))
-
   ;; Call frame-kill when running SPC q q instead of killing the window. For
   ;; some reason if we kill the window the server will go too.
   (evil-leader/set-key
     "q q" 'spacemacs/frame-killer)
+
+  ;; org-mode configuration
+  (setq org-directory "~/org")
+  (setq org-agenda-files (quote ("~/org")))
+  (setq org-default-notes-file "~/org/refile.org")
+
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
+
+  (setq org-todo-keyword-faces
+        (quote (("TODO" :foreground "red" :weight bold)
+                ("NEXT" :foreground "blue" :weight bold)
+                ("DONE" :foreground "forest green" :weight bold)
+                ("WAITING" :foreground "orange" :weight bold)
+                ("HOLD" :foreground "magenta" :weight bold)
+                ("CANCELLED" :foreground "forest green" :weight bold))))
+
+  (setq org-use-fast-todo-selection t)
+  (setq org-treat-S-cursor-todo-selection-as-state-change nil)
+
+  (setq org-todo-state-tags-triggers
+        (quote (("CANCELLED" ("CANCELLED" . t))
+                ("WAITING" ("WAITING" . t))
+                ("HOLD" ("WAITING") ("HOLD" . t))
+                (done ("WAITING") ("HOLD"))
+                ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
+                ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
+                ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+
+  ;; Capture templates
+  (setq org-capture-templates
+        (quote (("t" "todo" entry (file org-default-notes-file)
+                 "* TODO %?\n%T\n")
+                ("r" "respond" entry (file org-default-notes-file)
+                 "* NEXT Respond to %?:from on %:subject\nSCHEDULED: %t\n%U\n%a\n")
+                ("n" "note" entry (file org-default-notes-file)
+                 "* %? :NOTE:\n%U\n%a\n")
+                ("m" "meeting" entry (file org-default-notes-file)
+                 "* MEETING with %? :MEETING:\n%U")
+                )))
+
+  ;; Targets include this file and any file contributing to the agenda - up to 9 levels deep
+  (setq org-refile-targets (quote ((nil :maxlevel . 9)
+                                   (org-agenda-files :maxlevel . 9))))
+  (setq org-refile-use-outline-path 'file)
+  (setq org-outline-path-complete-in-steps nil)
+  ;; Allow refile to create parent tasks with confirmation
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
+
+  ;; Refile settings
+  ;; Exclude DONE state tasks from refile targets
+  (defun bh/verify-refile-target ()
+    "Exclude todo keywords with a done state from refile targets"
+    (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+
+  (setq org-refile-target-verify-function 'bh/verify-refile-target)
 
   ;; Better vue-mode using language-server-protocol and vetur
   ;; https://medium.com/@aria_39488/improving-vue-mode-for-better-vue-js-editing-inside-of-spacemacs-4509f0577ea0
@@ -519,6 +584,7 @@ before packages are loaded."
 
   (require 'company-lsp)
   (push 'company-lsp company-backends)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -535,8 +601,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
-   (quote
-    (symon string-inflection spaceline-all-the-icons all-the-icons memoize ruby-refactor ruby-hash-syntax pippel pipenv password-generator overseer org-brain nameless magithub ghub+ apiwrap magit-svn lsp-python lsp-javascript-typescript json-navigator hierarchy ivy-yasnippet ivy-xref ivy-purpose window-purpose imenu-list importmagic epc ctable concurrent deferred impatient-mode evil-org evil-lion evil-goggles evil-cleverparens paredit editorconfig counsel-css centered-cursor-mode browse-at-remote font-lock+ powershell jinja2-mode company-ansible ansible-doc ansible yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify vue-mode edit-indirect ssass-mode vue-html-mode volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package unfill toc-org tide typescript-mode tagedit sql-indent spaceline powerline smex smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs request rbenv rainbow-delimiters pyvenv pytest pyenv-mode py-isort puppet-mode pug-mode projectile-rails rake inflections popwin pip-requirements persp-mode pcre2el pbcopy paradox spinner ox-gfm osx-trash osx-dictionary orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file nginx-mode neotree mwim multi-term move-text mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lsp-vue lorem-ipsum livid-mode skewer-mode simple-httpd live-py-mode linum-relative link-hint launchctl js2-refactor multiple-cursors js2-mode js-doc ivy-hydra indent-guide hydra hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make helm helm-core haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache ht gh-md fuzzy flyspell-correct-ivy flyspell-correct flycheck-pos-tip flycheck flx-ido flx fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit git-commit ghub with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump dockerfile-mode docker json-mode tablist magit-popup docker-tramp json-snatcher json-reformat diminish diff-hl dactyl-mode cython-mode counsel-projectile projectile pkg-info epl counsel swiper ivy company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company-lsp lsp-mode company-auctex company-anaconda company column-enforce-mode coffee-mode clean-aindent-mode chruby bundler inf-ruby bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex async anaconda-mode pythonic f s aggressive-indent adaptive-wrap ace-window ace-link avy ac-ispell auto-complete popup solarized-theme dash))))
+   '(symon string-inflection spaceline-all-the-icons seeing-is-believing ruby-refactor ruby-hash-syntax prettier-js pippel pipenv password-generator ox-reveal overseer org-brain nameless magithub ghub+ apiwrap magit-svn lsp-python lsp-javascript-typescript json-navigator hierarchy importmagic epc concurrent deferred impatient-mode helm-xref helm-themes helm-swoop helm-pydoc helm-purpose window-purpose imenu-list helm-projectile helm-org-rifle helm-mode-manager helm-gitignore helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag gitignore-templates flyspell-correct-helm evil-org treepy ess-smart-equals ess-R-data-view ctable ess powershell jinja2-mode company-ansible ansible-doc ansible yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify vue-mode edit-indirect ssass-mode vue-html-mode volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package unfill toc-org tide typescript-mode tagedit sql-indent spaceline powerline smex smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs request rbenv rainbow-delimiters pyvenv pytest pyenv-mode py-isort puppet-mode pug-mode projectile-rails rake inflections popwin pip-requirements persp-mode pcre2el pbcopy paradox spinner ox-gfm osx-trash osx-dictionary orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file nginx-mode neotree mwim multi-term move-text mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lsp-vue lorem-ipsum livid-mode skewer-mode simple-httpd live-py-mode linum-relative link-hint launchctl js2-refactor multiple-cursors js2-mode js-doc ivy-hydra indent-guide hydra hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make helm helm-core haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache ht gh-md fuzzy flyspell-correct-ivy flyspell-correct flycheck-pos-tip flycheck flx-ido flx fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit git-commit ghub with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump dockerfile-mode docker json-mode tablist magit-popup docker-tramp json-snatcher json-reformat diminish diff-hl dactyl-mode cython-mode counsel-projectile projectile pkg-info epl counsel swiper ivy company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company-lsp lsp-mode company-auctex company-anaconda company column-enforce-mode coffee-mode clean-aindent-mode chruby bundler inf-ruby bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex async anaconda-mode pythonic f s aggressive-indent adaptive-wrap ace-window ace-link avy ac-ispell auto-complete popup solarized-theme dash)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -552,7 +617,7 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (powershell jinja2-mode company-ansible ansible-doc ansible yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify vue-mode edit-indirect ssass-mode vue-html-mode volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package unfill toc-org tide typescript-mode tagedit sql-indent spaceline powerline smex smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs request rbenv rainbow-delimiters pyvenv pytest pyenv-mode py-isort puppet-mode pug-mode projectile-rails rake inflections popwin pip-requirements persp-mode pcre2el pbcopy paradox spinner ox-gfm osx-trash osx-dictionary orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file nginx-mode neotree mwim multi-term move-text mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lsp-vue lorem-ipsum livid-mode skewer-mode simple-httpd live-py-mode linum-relative link-hint launchctl js2-refactor multiple-cursors js2-mode js-doc ivy-hydra indent-guide hydra hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make helm helm-core haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache ht gh-md fuzzy flyspell-correct-ivy flyspell-correct flycheck-pos-tip flycheck flx-ido flx fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit git-commit ghub with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump dockerfile-mode docker json-mode tablist magit-popup docker-tramp json-snatcher json-reformat diminish diff-hl dactyl-mode cython-mode counsel-projectile projectile pkg-info epl counsel swiper ivy company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company-lsp lsp-mode company-auctex company-anaconda company column-enforce-mode coffee-mode clean-aindent-mode chruby bundler inf-ruby bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex async anaconda-mode pythonic f s aggressive-indent adaptive-wrap ace-window ace-link avy ac-ispell auto-complete popup solarized-theme dash))))
+    (treepy ess-smart-equals ess-R-data-view ctable ess powershell jinja2-mode company-ansible ansible-doc ansible yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key wgrep web-mode web-beautify vue-mode edit-indirect ssass-mode vue-html-mode volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package unfill toc-org tide typescript-mode tagedit sql-indent spaceline powerline smex smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs request rbenv rainbow-delimiters pyvenv pytest pyenv-mode py-isort puppet-mode pug-mode projectile-rails rake inflections popwin pip-requirements persp-mode pcre2el pbcopy paradox spinner ox-gfm osx-trash osx-dictionary orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file nginx-mode neotree mwim multi-term move-text mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lsp-vue lorem-ipsum livid-mode skewer-mode simple-httpd live-py-mode linum-relative link-hint launchctl js2-refactor multiple-cursors js2-mode js-doc ivy-hydra indent-guide hydra hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make helm helm-core haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache ht gh-md fuzzy flyspell-correct-ivy flyspell-correct flycheck-pos-tip flycheck flx-ido flx fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit git-commit ghub with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump dockerfile-mode docker json-mode tablist magit-popup docker-tramp json-snatcher json-reformat diminish diff-hl dactyl-mode cython-mode counsel-projectile projectile pkg-info epl counsel swiper ivy company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company-lsp lsp-mode company-auctex company-anaconda company column-enforce-mode coffee-mode clean-aindent-mode chruby bundler inf-ruby bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex async anaconda-mode pythonic f s aggressive-indent adaptive-wrap ace-window ace-link avy ac-ispell auto-complete popup solarized-theme dash))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

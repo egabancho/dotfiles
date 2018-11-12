@@ -262,10 +262,8 @@
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Documents</string>
+	<string>~/Developer/dotfiles</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
-	<string>{712, 448}</string>
-	<key>NSNavPanelExpandedSizeForSaveMode</key>
 	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
@@ -298,16 +296,12 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
-	<key>NSWindow Frame NSFontPanel</key>
-	<string>2240 183 445 103 1680 -390 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>530 493 620 392 0 0 1680 1050 </string>
+	<string>410 381 620 392 0 0 1440 900 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>719 464 928 394 0 0 1680 1050 </string>
+	<string>269 148 1018 447 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1680 0 1680 1050 1680 -390 2560 1440 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
-	<string>842 0 836 1027 0 0 1680 1027 </string>
+	<string>155 98 570 404 0 0 1440 900 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -890,7 +884,7 @@
 			<key>Screen</key>
 			<integer>0</integer>
 			<key>Scrollback Lines</key>
-			<integer>1000</integer>
+			<integer>0</integer>
 			<key>Selected Text Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -943,14 +937,40 @@
 			<string>/Users/egabancho</string>
 		</dict>
 	</array>
+	<key>NoSyncHaveRequestedFullDiskAccess</key>
+	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>AE84C91A-85A9-402D-9CC6-B05ECA29D9BD</string>
+	<string>D40A72FE-492B-443C-A893-CF211DF5F800</string>
+	<key>NoSyncLastTipTime</key>
+	<real>561568920.16333401</real>
 	<key>NoSyncPermissionToShowTip</key>
-	<false/>
+	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>540204812.44046998</real>
+	<real>558227234.97107804</real>
+	<key>NoSyncTipsDisabled</key>
+	<true/>
+	<key>NoSyncTipsToNotShow</key>
+	<array>
+		<string>000</string>
+		<string>0000</string>
+		<string>0001</string>
+		<string>0002</string>
+		<string>0003</string>
+		<string>0004</string>
+		<string>0005</string>
+		<string>0006</string>
+		<string>0007</string>
+		<string>0008</string>
+		<string>0009</string>
+		<string>0010</string>
+		<string>0011</string>
+		<string>0012</string>
+		<string>0013</string>
+		<string>0014</string>
+		<string>0015</string>
+	</array>
 	<key>PMPrintingExpandedStateForPrint2</key>
 	<false/>
 	<key>PasteTabToStringTabStopSize</key>
@@ -989,7 +1009,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/egabancho/Developer/src/dotfiles</string>
+	<string>/Users/egabancho/Developer/dotfiles</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>SUEnableAutomaticChecks</key>
@@ -997,11 +1017,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final.xml?shard=23</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=78</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-05-24T09:26:51Z</date>
+	<date>2018-11-01T15:10:45Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1025,7 +1045,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.6</string>
+	<string>3.2.4</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

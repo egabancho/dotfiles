@@ -21,24 +21,11 @@ fi
 source $EXTRA_PATH
 
 # Install ruby
-rbenv install 2.5.0
-rbenv global 2.5.0
+rbenv install 2.5.1
+rbenv global 2.5.1
 ruby -v
 
 # Optional gems
-gem install rails -v 5.1.4
-gem install travis
-
-# Needed by ghi
-gem install pygments.rb
-
-gem install jekyll
+gem install rails -v 5.2.0
 
 rbenv rehash
-
-if ! grep -q travis $EXTRA_PATH; then
-    cat <<EOF >> $EXTRA_PATH
-# added by travis gem
-[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
-EOF
-fi
