@@ -102,14 +102,6 @@ alias dcps='docker-compose ps'
 alias dcstop='docker-compose stop'
 alias dcrestart='docker-compose restart'
 
-# Virtualenv
-alias workon='pyenv activate'
-alias deactivate='source deactivate'
-alias lsvirtualenv='pyenv virtualenvs'
-alias rmvirtualenv='pyenv uninstall'
-alias mkvirtualenv='pyenv virtualenv'
-alias cdvirtualenv='cd $VIRTUAL_ENV'
-
 # Shortcuts
 alias d='cd'
 alias h='history'
