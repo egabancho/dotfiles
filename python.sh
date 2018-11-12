@@ -5,6 +5,9 @@
 brew install pyenv
 pyenv init
 git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+pyenv virtualenv-init
+git clone https://github.com/pyenv/pyenv-virtualenvwrapper.git $(pyenv root)/plugins/pyenv-virtualenvwrapper
+pyenv virtualenvwrapper_lazy
 pyenv install 3.7.0
 pyenv global 3.7.0
 
@@ -22,11 +25,16 @@ if ! grep -q python_bootstrap $EXTRA_PATH; then
 # Add pipsi ~/.local/bin to the PATH
 export PATH="$HOME/.local/bin:$PATH"
 
-# Set venv directory inside Developer folder
-export WORKON_HOME=$HOME/Developer/venvs
+# Using pyvenv instead of virtualenv
+export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
-eval "$(pyenv init -)"
+# Prefix source prompt with virtualenvwrapper environment
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)"
+fi
 eval "$(pyenv virtualenv-init -)"
+pyenv virtualenvwrapper_lazy
+
 EOF
 fi
 
