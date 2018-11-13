@@ -93,7 +93,7 @@ alias di="docker images"
 
 alias dstopall='docker stop $(docker ps -a -q)'
 alias drmall='docker rm $(docker ps -a -q)'
-alias dmrmiall='docker rmi $(docker images -q)'
+alias drmiall='docker rmi $(docker images -q)'
 
 alias dcup='docker-compose up'
 alias dcb='docker-compose build'
