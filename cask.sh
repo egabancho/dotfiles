@@ -8,6 +8,7 @@ brew cask install chromedriver
 brew cask install clipy
 brew cask install dropbox
 brew cask install firefox
+brew cask install flux
 brew cask install google-chrome
 brew cask install gpg-suite
 brew cask install iina
@@ -19,6 +20,7 @@ brew cask install podcastmenu
 brew cask install postman
 brew cask install rambox
 brew cask install sketch
+brew cask install skype
 brew cask install spectacle
 brew cask install spotify
 brew cask install visual-studio-code
