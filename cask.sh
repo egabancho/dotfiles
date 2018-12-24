@@ -13,6 +13,7 @@ brew cask install google-chrome
 brew cask install gpg-suite
 brew cask install iina
 brew cask install iterm2
+brew cask install java
 brew cask install kap
 brew cask install karabiner-elements
 brew cask install keybase
