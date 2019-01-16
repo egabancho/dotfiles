@@ -13,12 +13,15 @@
     # View the current working tree status using the short format
     s = status -s
 
-   # Clone a repository including all submodules
+    # Clone a repository including all submodules
     c = clone --recursive
 
     ci = commit
     # Commit all changes
     ca = !git add -A && git commit -av
+
+    # cherry-pick
+    cp = cherry-pick
 
     # Switch to a branch, creating it if necessary
     go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"

@@ -25,6 +25,9 @@ rbenv install 2.5.1
 rbenv global 2.5.1
 ruby -v
 
+# Nice REPL
+gem install pry
+
 # Optional gems
 gem install rails -v 5.2.0
 

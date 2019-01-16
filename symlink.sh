@@ -14,3 +14,8 @@ for file in $(ls $CWD/bin/); do
     ln -vfs $CWD/bin/"$file" $HOME/.local/bin/$file;
 done
 unset file;
+
+# iCloud Drive
+# TODO: only for macos
+ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/org $HOME/org
+ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs iCLoud\ $HOME/iCloud\ Drive

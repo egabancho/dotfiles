@@ -55,6 +55,7 @@ brew install neovim
 # Install fonts.
 brew tap caskroom/fonts
 brew cask install font-source-code-pro
+brew cask install font-dejavu
 
 # Install other useful binaries.
 brew install openssh
@@ -86,6 +87,8 @@ brew install m-cli
 brew install wifi-password
 # A simple, fast and user-friendly alternative to 'find'
 brew install fd
+# Manage several Java environments
+brew install jenv
 
 # Python XMLSec requirement library.
 brew install Libxmlsec1

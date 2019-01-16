@@ -96,12 +96,12 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(vue-mode
+   dotspacemacs-additional-packages '(company-lsp
+                                      editorconfig
                                       lsp-mode
                                       lsp-vue
-                                      company-lsp
+                                      vue-mode
                                       yasnippet-snippets)
-
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -205,7 +205,7 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(solarized-dark
-                         spacemacs-dark)
+                         solarized-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
@@ -497,6 +497,9 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+  ;; Listen what .editorconfig has to say
+  (editorconfig-mode 1)
+
   ;; Show 80-column marker
   (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
   (global-fci-mode 1)
@@ -509,6 +512,12 @@ before packages are loaded."
   ;; alias e='emacsclient -n -t' to your bashrc or similar
   (setq s-pop-up-frames nil)
 
+  ;; Handle querying the passphrase through minibuffer.
+  (setq epa-pinentry-mode 'loopback)
+
+  ;; Set the NeoTree Theme to Nerd
+  (setq neo-theme 'nerd)
+
   ;; Call frame-kill when running SPC q q instead of killing the window. For
   ;; some reason if we kill the window the server will go too.
   (evil-leader/set-key
@@ -516,20 +525,12 @@ before packages are loaded."
 
   ;; org-mode configuration
   (setq org-directory "~/org")
-  (setq org-agenda-files (quote ("~/org")))
+  (setq org-agenda-files '("~/org"))
   (setq org-default-notes-file "~/org/refile.org")
 
   (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
-
-  (setq org-todo-keyword-faces
-        (quote (("TODO" :foreground "red" :weight bold)
-                ("NEXT" :foreground "blue" :weight bold)
-                ("DONE" :foreground "forest green" :weight bold)
-                ("WAITING" :foreground "orange" :weight bold)
-                ("HOLD" :foreground "magenta" :weight bold)
-                ("CANCELLED" :foreground "forest green" :weight bold))))
+        '((sequence "TODO" "WAITING(!)" "SOMEDAY(!)" "|" "DONE(!)" "CANCELED(!)")
+          (sequence "IDEA")))
 
   (setq org-use-fast-todo-selection t)
   (setq org-treat-S-cursor-todo-selection-as-state-change nil)
@@ -570,6 +571,10 @@ before packages are loaded."
     (not (member (nth 2 (org-heading-components)) org-done-keywords)))
 
   (setq org-refile-target-verify-function 'bh/verify-refile-target)
+
+  ;; I use reveal because I'm cool
+  ;; I place the css, js, plugin and stylesheet directories into a folder that contains all my .org
+  (setq org-reveal-root "")
 
   ;; Better vue-mode using language-server-protocol and vetur
   ;; https://medium.com/@aria_39488/improving-vue-mode-for-better-vue-js-editing-inside-of-spacemacs-4509f0577ea0
