@@ -93,5 +93,9 @@ brew install jenv
 # Python XMLSec requirement library.
 brew install Libxmlsec1
 
+# Install PostgreSQL client
+brew install libpq
+brew link --force libpq # we don't install the server locally: docker!
+
 # Remove outdated versions from the cellar.
 brew cleanup
