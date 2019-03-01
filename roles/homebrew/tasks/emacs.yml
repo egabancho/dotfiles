@@ -1,0 +1,15 @@
+---
+- name: Tap emacs-plus
+  homebrew_tap:
+    name: d12frosted/emacs-plus
+
+- name: Install emacs
+  homebrew:
+      name: emacs-plus
+      state: head
+
+- name: Clone spacemacs
+  git:
+    repo: https://github.com/syl20bnr/spacemacs
+    dest: $HOME/.emacs.d
+    version: develop

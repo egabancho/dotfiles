@@ -1,0 +1,15 @@
+---
+- name: Install Vim
+  homebrew:
+    name: vim
+    state: latest
+
+- name: Make .vim folder
+  file:
+      path: $HOME/.vim/colors
+      state: directory
+
+- name: Download Solarized theme for Vim
+  get_url:
+    url: https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim
+    dest: $HOME/.vim/colors/

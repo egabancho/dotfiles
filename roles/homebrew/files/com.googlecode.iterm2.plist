@@ -259,10 +259,6 @@
 	<integer>8388864</integer>
 	<key>JobName</key>
 	<false/>
-	<key>LoadPrefsFromCustomFolder</key>
-	<true/>
-	<key>NSNavLastRootDirectory</key>
-	<string>~/Developer/dotfiles</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -1008,8 +1004,6 @@
 			<string>kNextWindowPointerAction</string>
 		</dict>
 	</dict>
-	<key>PrefsCustomFolder</key>
-	<string>/Users/egabancho/Developer/dotfiles</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>SUEnableAutomaticChecks</key>

@@ -1,0 +1,62 @@
+---
+
+- name: Python - Install pyenv
+  homebrew:
+    name: pyenv
+
+- name: Python - Install a better python version
+  command: "pyenv install {{ python_version }}"
+  args:
+    creates: "$HOME/.pyenv/versions/{{ python_version }}"
+
+- name: Python - Use a better python version
+  lineinfile:
+    path: $HOME/.pyenv/version
+    line: "{{ python_version }}"
+
+- name: Python - Install pyenv plugins
+  git:
+    repo: "{{ item.src }}"
+    dest: "$HOME/.pyenv/{{ item.dest }}"
+    update: no
+  with_items:
+    - {src: "https://github.com/pyenv/pyenv-virtualenvwrapper.git",
+       dest: "plugins/pyenv-virtualenvwrapper"}
+    - {src: "https://github.com/pyenv/pyenv-virtualenv.git",
+       dest: "plugins/pyenv-virtualenv" }
+
+- name: Python - Add extra pyenv configuration to .extra
+  blockinfile:
+    path: $HOME/.extra
+    marker: "# {mark} ANSIBLE MANAGED PYTHON BLOCK"
+    create: yes
+    block: |
+      # Using pyvenv instead of virtualenv
+      export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+      if which pyenv > /dev/null; then
+        eval "$(pyenv init -)"
+        eval "$(pyenv virtualenv-init -)"
+        pyenv virtualenvwrapper_lazy
+      fi
+
+- name: Python - Install pipx
+  pip:
+    name: pipx
+
+- name: Python - Install python CLI applications using pipx
+  command: "pipx install {{ item }}"
+  args:
+    creates: "$HOME/.local/pipx/venvs/{{ item }}"
+  with_items:
+    - autoflake
+    - cookiecutter
+    - flake8
+    - hy
+    - isort
+    - pipenv
+    - pygments
+    - yapf
+
+
+
+-

@@ -1,0 +1,33 @@
+---
+- name: Symlink .files
+  file:
+    src: '{{ role_path }}/files/{{ item.src }}'
+    dest: '$HOME/{{ item.dest }}'
+    state: link
+  with_items:
+    - { src: 'aliases', dest: '.aliases' }
+    - { src: 'bash_logout', dest: '.bash_logout' }
+    - { src: 'bash_profile', dest: '.bash_profile' }
+    - { src: 'bashrc', dest: '.bashrc' }
+    - { src: 'exports', dest: '.exports' }
+    - { src: 'functions', dest: '.functions' }
+    - { src: 'gitconfig', dest: '.gitconfig' }
+    - { src: 'gitignore_global', dest: '.gitignore_global' }
+    - { src: 'inputrc', dest: '.inputrc' }
+    - { src: 'spacemacs', dest: '.spacemacs' }
+    - { src: 'tmux.conf', dest: '.tmux.conf' }
+    - { src: 'vimrc', dest: '.vimrc' }
+    - { src: 'wgetrc', dest: '.wgetrc' }
+
+- name: Create .config paths
+  file:
+    path: "$HOME/.config/{{ item }}"
+    state: directory
+  with_items:
+    - karabiner
+
+- name: Symlink karabiner config
+  file:
+    src: "{{ role_path }}/files/karabiner.json"
+    dest: "$HOME/.config/karabiner/karabiner.json"
+    state: link

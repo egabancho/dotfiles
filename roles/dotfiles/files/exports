@@ -35,3 +35,6 @@ export GPG_TTY=$(tty)
 
 # Bat color theme
 export BAT_THEME='TwoDark'
+
+# Add local bin to the path
+export PATH="$HOME/.local/bin:$PATH"

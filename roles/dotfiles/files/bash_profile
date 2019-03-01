@@ -5,9 +5,6 @@ for file in $HOME/.{aliases,exports,functions,extra}; do
 done;
 unset file;
 
-# Only load Liquid Prompt in interactive shells, not from a script or from scp
-[[ $- = *i* ]] && source ~/.liquidprompt/liquidprompt
-
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
 

@@ -1,0 +1,18 @@
+---
+
+- name: UI/UX - Set highlight color green
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleHighlightColor
+    value: "0.764700 0.976500 0.568600"
+    type: string
+  notify: Restart Finder
+
+
+- name: UI/UX - Hide menu bar
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: _HIHideMenuBar
+    value: true
+    type: bool
+  notify: Restart Finder

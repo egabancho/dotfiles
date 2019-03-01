@@ -1,0 +1,25 @@
+---
+- name: Install Cask applications
+  homebrew_cask:
+    name: "{{ item }}"
+  with_items:
+    - agenda
+    - appcleaner
+    - bartender
+    - chromedriver
+    - docker
+    - dropbox
+    - firefox
+    - google-chrome
+    - gpg-suite
+    - iina
+    - kap
+    - karabiner-elements
+    - keybase
+    - microsoft-office
+    - podcastmenu
+    - postman
+    - rambox
+    - skype
+    - spectacle
+    - spotify

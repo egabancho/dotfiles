@@ -1,0 +1,10 @@
+---
+- name: Running installation
+  hosts: system
+
+  roles:
+  - dotfiles
+  - homebrew
+  - python
+  - npm
+  - macos
