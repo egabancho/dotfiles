@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
 # Make emacs the default editor.
-export EDITOR='emacsclient -c';
+if [ -z "$SSH_CONNECTION" ]; then
+    export EDITOR='emacsclient -c';
+    export ALTERNATE_EDITOR="";
+else
+    export EDITOR=$(type -P vim || type -P vi)
+fi
+export VISUAL=$EDITOR
+
 
 # Enable persistent REPL history for `node`.
 export NODE_REPL_HISTORY_FILE=~/.node_history;

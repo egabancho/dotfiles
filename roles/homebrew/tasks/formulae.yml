@@ -14,6 +14,7 @@
     # Install latest bash
     'bash',
     'bash-completion',
+    'liquidprompt',
     # Install GnuPG to enable PGP-signing commits.
     'gnupg',
     # Install other useful binaries.
@@ -23,6 +24,7 @@
     'git-extras',
     'ghi',
     'hub',
+    'hg',
     'ispell',
     'ag',
     'ack',
@@ -53,6 +55,20 @@
     'jenv',
     # PostgreSQL client
     'libpq',
+    # kubernetes CLI
+    'kubernetes-cli',
+    # ptyhon xmlsec needs this
+    'Libxmlsec1',
+    'ffmpeg',
+    'telnet',
+    'r',
+    # Certificate tools
+    'mkcert',
+    'nss',
+    # Gitlab-runner for local testiing
+    'gitlab-runner',
+    # lzma
+    'xz',
     ]
 
 

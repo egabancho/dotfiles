@@ -96,6 +96,7 @@ alias drmall='docker rm $(docker ps -a -q)'
 alias drmiall='docker rmi $(docker images -q)'
 
 alias dcup='docker-compose up'
+alias dcdown='docker-compose down'
 alias dcb='docker-compose build'
 alias dcrm='docker-compose rm'
 alias dcps='docker-compose ps'
@@ -120,7 +121,7 @@ fi
 alias g='git'
 
 #Editors
-alias v='nvim'
+alias v='vim'
 alias vimnoplugin='vim -u NONE'
 
 # URL-encode strings

@@ -1,0 +1,29 @@
+---
+
+- name: Ruby - Install rbenv
+  homebrew:
+    name: [
+    'rbenv',
+    'ruby-build'
+    ]
+
+
+- name: Ruby - Install a better ruby version
+  command: "rbenv install {{ ruby_version }}"
+  args:
+    creates: "$HOME/.rbenv/versions/{{ ruby_version}}"
+
+- name: Ruby - Use a better ruby version
+  lineinfile:
+    path: $HOME/.rbenv/version
+    line: "{{ ruby_version }}"
+
+- name: Ruby - Add extra rbenv configuration to .extra
+  blockinfile:
+    path: $HOME/.extra
+    marker: "# {mark} ANSIBLE MANAGED RUBY BLOCK"
+    create: yes
+    block: |
+      if which rbenv > /dev/null; then
+        eval "$(rbenv init -)";
+      fi

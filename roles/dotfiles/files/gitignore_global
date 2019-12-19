@@ -42,6 +42,12 @@ Thumbs.db
 ###########
 *~
 *#
+.vscode
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*ansi-term-*
 
 # Python #
 ##########
@@ -51,3 +57,4 @@ Thumbs.db
 # JS #
 ######
 node_modules/
+.tern-port

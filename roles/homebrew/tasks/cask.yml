@@ -1,25 +1,45 @@
 ---
-- name: Install Cask applications
+- name: Cask - Add tap for versions
+  homebrew_tap:
+    name: "{{ item }}"
+  with_items:
+    - homebrew/cask-drivers
+    - homebrew/cask-versions
+
+- name: Cask - Install Cask applications
   homebrew_cask:
     name: "{{ item }}"
   with_items:
-    - agenda
+    # - adobe-photoshop-lightroom600
+    # - agenda
+    # - copyclip
+    # - microsoft-office
+    # - rambox
+    # - visual-studio-code
+    - 1password
     - appcleaner
     - bartender
     - chromedriver
     - docker
     - dropbox
     - firefox
+    - gitter
     - google-chrome
     - gpg-suite
+    - grammarly
     - iina
     - kap
     - karabiner-elements
     - keybase
-    - microsoft-office
+    - luna-display
+    - maccy
+    - mattermost
+    - minikube
     - podcastmenu
     - postman
-    - rambox
     - skype
+    - slack
     - spectacle
     - spotify
+    - virtualbox
+    - whatsapp
