@@ -55,7 +55,7 @@
     - isort
     - pipenv
     - pygments
-    - yapf
+    - black
 
 
 
