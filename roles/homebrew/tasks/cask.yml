@@ -12,15 +12,19 @@
   with_items:
     # - adobe-photoshop-lightroom600
     # - agenda
+    # - bartender
     # - copyclip
     # - microsoft-office
     # - rambox
-    # - visual-studio-code
+    # - spectacle
     - 1password
+    - alfred
     - appcleaner
-    - bartender
+    - bettertouchtool
+    - captin
     - chromedriver
     - docker
+    - dozer
     - dropbox
     - firefox
     - gitter
@@ -31,15 +35,19 @@
     - kap
     - karabiner-elements
     - keybase
+    - keycastr
     - luna-display
     - maccy
     - mattermost
+    - menumeters
     - minikube
     - podcastmenu
     - postman
+    - rectangle
     - skype
     - slack
-    - spectacle
     - spotify
     - virtualbox
+    - visual-studio-code
     - whatsapp
+    - zoom
