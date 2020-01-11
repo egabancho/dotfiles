@@ -20,6 +20,9 @@ export NODE_REPL_MODE='sloppy';
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
 
+# Require pip to run inside a virtual enviroment
+export PIP_REQUIRE_VIRTUALENV=true
+
 # Increase Bash history size. Allow 32³ entries; the default is 500.
 export HISTSIZE='32768';
 export HISTFILESIZE="${HISTSIZE}";
