@@ -41,6 +41,7 @@
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
     ~/.zshrc: zshrc
+    ~/.zshenv: zshenv
 
     ~/.gnupg/gpg-agent.conf:
         create: True
