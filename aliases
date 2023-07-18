@@ -80,7 +80,8 @@ alias wget='wget -c'
 alias ports='netstat -tulanp'
 
 # git
-alias gs='git status'
+alias gs='git st'
+alias g='git l'
 alias gstash='git stash save --include-untracked'
 alias go='git checkout'
 alias gc='git commit -S'
