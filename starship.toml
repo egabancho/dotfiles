@@ -1,0 +1,12 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+[directory]
+truncation_length = 8
+
+[kubernetes]
+disabled = true
+detect_folders = ["k8s"]
+
+[kubernetes.user_aliases]
+".*cluster/fanalytical.*" = "fanalytical"

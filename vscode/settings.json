@@ -1,0 +1,101 @@
+{
+    "editor.minimap.enabled": false,
+    "vs-kubernetes": {
+        "vscode-kubernetes.minikube-path.mac": "/Users/egabancho/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+        "vs-kubernetes.minikube-show-information-expiration": "2023-11-06T20:19:27.552Z"
+    },
+    "redhat.telemetry.enabled": false,
+    "autoDocstring.docstringFormat": "one-line-sphinx",
+    // Vim easymotion is required for Jump menu - <SPC> j
+    "vim.easymotion": true,
+    // Use system clipboard for vim
+    "vim.useSystemClipboard": true,
+    // Trigger the main which key menu with in the active editor with vim
+    // This cannot be put into keybindings.json because it will
+    // create conflict with Vim.
+    // https://github.com/stevenguh/spacecode/issues/3
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<space>"],
+            "commands": ["vspacecode.space"]
+        },
+        {
+            "before": [","],
+            "commands": [
+                "vspacecode.space",
+                {
+                    "command": "whichkey.triggerKey",
+                    "args": "m"
+                }
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<space>"],
+            "commands": ["vspacecode.space"]
+        },
+        {
+            "before": [","],
+            "commands": [
+                "vspacecode.space",
+                {
+                    "command": "whichkey.triggerKey",
+                    "args": "m"
+                }
+            ]
+        }
+    ],
+    "cSpell.userWords": [
+        "dataframe",
+        "fanalytical",
+        "Invenio",
+        "mlflow",
+        "paciolan",
+        "pydantic",
+        "pyspark",
+        "sankey",
+        "sqlalchemy",
+        "starlette"
+    ],
+    "cSpell.diagnosticLevel": "Hint",
+    "markdown.validate.enabled": true,
+    "editor.lineNumbers": "relative",
+    "notebook.lineNumbers": "on",
+    "python.formatting.provider": "black",
+    "python.linting.ignorePatterns": [
+        "**/site-packages/**/*.py",
+        ".vscode/*.py",
+        "./venv*/**/*.py"
+    ],
+    "python.linting.mypyCategorySeverity.error": "Warning",
+    "python.linting.pycodestyleCategorySeverity.W": "Hint",
+    "python.linting.pycodestyleCategorySeverity.E": "Hint",
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "editor.rulers": [
+        88
+    ],
+    "colorize.languages": [
+		"css",
+		"sass",
+		"scss",
+		"less",
+		"postcss",
+		"sss",
+		"stylus",
+		"xml",
+		"svg",
+        "python",
+    ],
+    "editor.guides.bracketPairs": "active",
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--max-line-length 88",
+        "--extend-ignore=E203,E501"
+    ],
+    "editor.linkedEditing": true,
+    "workbench.colorTheme": "GitHub Dark",
+    "telemetry.telemetryLevel": "off",
+}

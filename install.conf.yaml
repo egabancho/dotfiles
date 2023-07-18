@@ -1,0 +1,89 @@
+- defaults:
+    link:
+        relink: True
+    brew:
+        stdin: True
+        stderr: True
+        stdout: True
+    cask:
+        stdin: True
+        stderr: True
+        stdout: True
+    brewfile:
+        stdin: True
+        stderr: True
+        stdout: True
+    shell:
+      stderr: true
+      stdout: true
+
+- clean: ['~']
+
+# Installs brew if missing
+- install-brew: True
+
+# Reads brewfile for packages to install
+- brewfile:
+    - Brewfile
+
+- create:
+    - ~/Developer
+    - ~/Developer/src
+
+- link:
+    ~/.aliases: aliases
+    ~/.bash_logout: bash_logout
+    ~/.bashrc: bashrc
+    ~/.functions: functions
+    ~/.gitconfig: gitconfig
+    ~/.gitignore: gitignore
+    ~/.inputrc: inputrc
+    ~/.tmux.conf: tmux.conf
+    ~/.vimrc: vimrc
+    ~/.zshrc: zshrc
+
+    ~/.gnupg/gpg-agent.conf:
+        create: True
+        path: gnupg/gpg-agent.conf
+    ~/.config/alacritty/alacritty.yml:
+        create: True
+        path: alacritty.yml
+    ~/.config/karabiner/karabiner.json:
+        create: True
+        path: karabiner.json
+    ~/.config/direnv/:
+        create: True
+        glob: True
+        path: direnv/*
+    ~/.config/starship.toml:
+        create: True
+        path: starship.toml
+    ~/Library/Application Support/Code/User/settings.json:
+        create: True
+        path: vscode/settings.json
+    ~/Library/Application Support/Code/User/keybindings.json:
+        create: True
+        path: vscode/keybindings.json
+
+- asdf:
+    - plugin: direnv
+      versions:
+        - latest
+      global: latest
+    - plugin: python
+      versions:
+        - 2.7.18
+        - 3.8.10 # nodejs v14
+        - 3.9.17
+        - 3.10.12
+        - latest
+      global: latest
+    - plugin: nodejs
+      versions:
+        # - 7.10.1
+        # - 14.21.3
+        - 18.16.1
+      global: 18.16.1
+
+- shell:
+    - [asdf direnv setup --shell zsh --version latest]
