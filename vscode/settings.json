@@ -50,6 +50,7 @@
         "dataframe",
         "fanalytical",
         "Invenio",
+        "ipdb",
         "mlflow",
         "paciolan",
         "pydantic",
