@@ -12,6 +12,9 @@ eval "$(starship init zsh)"
 # direvn
 eval "$(direnv hook zsh)"
 
+# turn on autocompletion
+autoload -Uz compinit && compinit
+
 # This speeds up pasting w/ autosuggest
 # https://github.com/zsh-users/zsh-autosuggestions/issues/238
 pasteinit() {
@@ -28,6 +31,18 @@ DISABLE_MAGIC_FUNCTIONS=true
 
 # https://github.com/zsh-users/zsh-autosuggestions/issues/351
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
+
+# Move word by word using Atl + left/right
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+
+# Completion based on history using arrows
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
 
 # preload git completions for usage in aliases
 _git 2>/dev/null
