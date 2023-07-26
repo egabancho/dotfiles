@@ -67,3 +67,5 @@ export LC_ALL='en_US.UTF-8';
 export PATH="/Users/egabancho/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
