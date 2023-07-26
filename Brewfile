@@ -77,6 +77,7 @@ brew "mas" # Mac App Store command line interface
 
 cask "mattermost" # chat
 cask "1password"
+cask "1password/tap/1password-cli"
 cask "alacritty"
 cask "appcleaner"
 cask "captin" # Displays the status of capslock key
