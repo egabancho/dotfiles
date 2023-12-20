@@ -17,6 +17,7 @@ brew "tcl-tk"
 brew "tmux"
 brew "gcc"
 brew "make"
+brew "bash"
 
 
 brew "gnupg"  # Install GnuPG to enable PGP-signing commits.
@@ -66,6 +67,9 @@ brew "starship" # better prompt management
 
 brew "asdf"
 brew "pipx"
+brew "terraform"
+brew "cairo"
+brew "graphviz" # required by pydot
 
 
 # Fonts
@@ -75,16 +79,21 @@ cask "font-hack-nerd-font"
 # Apps
 brew "mas" # Mac App Store command line interface 
 
+brew "hugo" # Static site generator
+
+
 cask "mattermost" # chat
 cask "1password"
 cask "1password/tap/1password-cli"
 cask "alacritty"
 cask "appcleaner"
+cask "calibre" # ebook libra qqry
 cask "captin" # Displays the status of capslock key
 cask "carbon-copy-cloner" # disk backup and cloning
 cask "clickup" # project management
 cask "discord" # chat
 cask "dozer" # Hide menubar items
+cask "figma"
 cask "firefox"
 cask "google-chrome"
 cask "grammarly"
@@ -93,9 +102,11 @@ cask "imageoptim" # Image optimizer
 cask "inkscape" # SVG editor
 cask "karabiner-elements" # karabiner for mapping multiple keys to one
 cask "keycastr"  # keystroke visualizer
+cask "obs" # screen recording tool
 cask "obsidian"
 cask "docker"
 # cask "rancher" # replace docker for mac
+cask "raspberry-pi-imager"
 cask "rectangle" # Window manager
 cask "slack" # chat
 cask "visual-studio-code"
@@ -105,3 +116,6 @@ cask "zoom" # Video conferencing
 brew "docker-compose"
 brew "kubernetes-cli" # kubectl
 brew "kubectx" # Faster way to switch between clusters and namespaces in kubectl 
+brew "kubeseal"
+brew "helm"
+brew "awscli"
