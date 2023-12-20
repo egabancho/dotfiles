@@ -56,3 +56,5 @@ node_modules/
 
 # direnv config file #
 .envrc
+# asdf file
+.tool-versions
