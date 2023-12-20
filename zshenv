@@ -43,5 +43,3 @@ export BAT_THEME='TwoDark'
 
 # Add local bin to the path
 export PATH=$PATH:$HOME/.local/bin:$HOME/.scripts
-# psql is a keg-only formula
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"

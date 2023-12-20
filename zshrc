@@ -1,4 +1,4 @@
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(brew shellenv)"
 eval "$(starship init zsh)"
 
 # Aliases
@@ -8,7 +8,7 @@ eval "$(starship init zsh)"
 [ -f $HOME/.functions ] && source $HOME/.functions
 
 # asdf
-[ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ] && source /opt/homebrew/opt/asdf/libexec/asdf.sh
+[ -f "$(brew --prefix)/opt/asdf/libexec/asdf.sh" ] && source "$(brew --prefix)/opt/asdf/libexec/asdf.sh"
 # direvn
 eval "$(direnv hook zsh)"
 
@@ -59,3 +59,6 @@ source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 # GCP stuff
 source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
 source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+
+# psql is a keg-only formula
+export PATH="$(brew --prefix)/opt/libpq/bin:$PATH"
