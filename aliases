@@ -57,7 +57,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # Find process by name
-alias got='ps awx | grep'
+alias got='ps awx | egrep'
 
 # Intuitive map function
 # For example, to list all directories that contain a certain file:
@@ -124,6 +124,7 @@ alias kgp='kubectl get pods -o wide'
 # Terraform
 alias tf='terraform'
 alias tfmt='terraform fmt'
+alias tfv='terraform validate'
 alias tfp='terraform plan'
 alias tfa='terraform apply'
 alias tfd='terraform destroy'
