@@ -32,6 +32,11 @@ DISABLE_MAGIC_FUNCTIONS=true
 # https://github.com/zsh-users/zsh-autosuggestions/issues/351
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 
+bindkey -e
+
+# Delete not working for some reason
+bindkey  "^[[3~"  delete-char
+
 # Move word by word using Atl + left/right
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
@@ -49,9 +54,8 @@ _git 2>/dev/null
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/egabancho/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+
+# GCP stuff
+source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
