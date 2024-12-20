@@ -1,5 +1,3 @@
-brew "python" # Python, better install it before others
-brew "Libxmlsec1" # python xmlsex need this one
 # Install GNU core utilities (those that come with OS X are outdated).
 # List of all utils: https://en.wikipedia.org/wiki/List_of_GNU_Core_Utilities_commands
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
@@ -7,7 +5,6 @@ brew "coreutils"
 brew "findutils" # Install GNU `find`, `locate`, `updatedb`, and `xargs`
 brew "gnu-sed" # GNU `sed`, overwriting the built-in `sed`
 brew "openssh"
-brew "openssl@1.1" # python 2.7
 brew "openssl"
 brew "readline"
 brew "sqlite3"
@@ -30,7 +27,9 @@ brew "ctop" # Htop but for docker containers
 
 brew "vim"
 brew "nano"
+brew "neovim"
 
+brew "stow" # dotfile management 
 brew "httpie" # HTTP client
 brew "fzf" # Command line fuzzy finder
 brew "jq" # JSON processort
@@ -39,12 +38,14 @@ brew "wget"
 brew "curl"
 brew "bat" # Better 'cat' with syntax highlighting
 brew "fd" # Better 'find' - faster
+brew "eza" # Better ls
+brew "zoxide" # Better cd
 brew "ripgrep" # Better 'grep'
 brew "ncdu" # Nice disk usage analyzer
 brew "tldr" # Gives nice TLDR from man pages
 brew "tree"  # Tree of folder's structure
-brew "trash"  # Moves to trash instead of removing completely - use it with "rm" alias
-brew "terminal-notifier"  # Nice notifications from the terminal
+brew "direnv" # Load environments variables depending on directory
+brew "yazi" # Terminal file manager
 
 brew "git"
 brew "git-extras"
@@ -61,61 +62,50 @@ brew "colordiff"
 brew "litecli" # Better SQLite CLI
 brew "libpq" # PostgeSQL client, needs to be added to the path
 
-brew "wifi-password" # Get the password of the WiFi you're on.
-
 brew "starship" # better prompt management
 
-brew "asdf"
-brew "pipx"
-brew "terraform"
 brew "cairo"
 brew "graphviz" # required by pydot
 
+brew "hugo" # Static site generator
+
+# GPG: https://github.com/microsoft/vscode/wiki/Commit-Signing
+brew "gpg2"
+brew "gnupg"
+brew "pinentry-mac"
 
 # Fonts
-tap "homebrew/cask-fonts"
 cask "font-hack-nerd-font"
 
-# Apps
-brew "mas" # Mac App Store command line interface 
-
-brew "hugo" # Static site generator
 
 
 cask "mattermost" # chat
 cask "1password"
-cask "1password/tap/1password-cli"
 cask "alacritty"
+cask "wezterm"
 cask "appcleaner"
 cask "calibre" # ebook libra qqry
-cask "captin" # Displays the status of capslock key
 cask "carbon-copy-cloner" # disk backup and cloning
-cask "clickup" # project management
 cask "discord" # chat
-cask "dozer" # Hide menubar items
 cask "figma"
 cask "firefox"
 cask "google-chrome"
-cask "grammarly"
-cask "imagealpha" # Image optimizer
 cask "imageoptim" # Image optimizer
 cask "inkscape" # SVG editor
-cask "karabiner-elements" # karabiner for mapping multiple keys to one
 cask "keycastr"  # keystroke visualizer
-cask "obs" # screen recording tool
 cask "obsidian"
 cask "docker"
-# cask "rancher" # replace docker for mac
-cask "raspberry-pi-imager"
 cask "rectangle" # Window manager
 cask "slack" # chat
 cask "visual-studio-code"
 cask "zoom" # Video conferencing
 
-# brew "docker"
 brew "docker-compose"
 brew "kubernetes-cli" # kubectl
-brew "kubectx" # Faster way to switch between clusters and namespaces in kubectl 
 brew "kubeseal"
 brew "helm"
-brew "awscli"
+cask "google-cloud-sdk"
+brew "pyenv"
+
+brew "koekeishiya/formulae/skhd"
+brew "koekeishiya/formulae/yabai"

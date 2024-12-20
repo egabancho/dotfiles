@@ -1,0 +1,36 @@
+import = [
+    "./catppuccin-mocha.toml",
+]
+[font.bold]
+family = "Hack Nerd Font Mono"
+style = "Bold"
+
+[font.italic]
+family = "Hack Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = "|:\"' {}()[]<>"
+
+[window]
+startup_mode = "Maximized"
+decorations = "buttonless"
+opacity = 0.9
+
+[window.dimensions]
+columns = 200
+lines = 70
+
+[window.padding]
+x = 5
+y = 5
+
+[keyboard]
+bindings = [
+  { key = "Right", mods = "Alt", chars = "\u001BF" },
+  { key = "Left",  mods = "Alt", chars = "\u001BB" },
+]

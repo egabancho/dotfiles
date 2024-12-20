@@ -1,0 +1,110 @@
+# Zinit
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+# Zinit pluings
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+# Snippets
+zinit snippet OMZP::brew
+zinit snippet OMZP::colored-man-pages
+zinit snippet OMZP::command-not-found
+zinit snippet OMZP::common-aliases
+zinit snippet OMZP::docker
+zinit snippet OMZP::docker-compose
+zinit snippet OMZP::extract
+zinit snippet OMZP::eza
+zinit snippet OMZP::git
+
+# turn on autocompletion
+autoload -Uz compinit && compinit
+zinit cdreplay -q
+
+# Keybindings
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+# Completion based on history using arrows
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+bindkey '^[w' kill-region
+# Delete not working for some reason
+bindkey  "^[[3~"  delete-char
+# Move word by word using Atl + left/right
+bindkey "[D" backward-word # ALT-left-arrow  ⌥ + ←
+bindkey "[C" forward-word  # ALT-right-arrow ⌥ + →
+
+# History
+export HISTIGNORE="&:ls:ll:l:cd:[bf]g:exit:pwd:clear:[ \t]*"
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+export SAVEHIST=$HISTSIZE
+export HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu select
+
+# Thank you, but no thank you
+unsetopt autocd
+unsetopt beep
+unsetopt nomatch
+
+# set language
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+# Starship prompt
+eval "$(starship init zsh)"
+# direvn
+eval "$(direnv hook zsh)"
+# fzf
+eval "$(fzf --zsh)"
+# zoxide
+eval "$(zoxide init zsh --cmd cd)"
+
+# invenio-cli
+eval "$(_INVENIO_CLI_COMPLETE=source_zsh invenio-cli)"
+# uv completions
+eval "$(uv generate-shell-completion zsh)"
+# ruff completions
+eval "$(ruff generate-shell-completion zsh)"
+# pyenv
+eval "$(pyenv init -)"
+
+# GCP stuff
+source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Aliases
+[ -f $HOME/.aliases ] && source $HOME/.aliases
+# Functions
+[ -f $HOME/.functions ] && source $HOME/.functions
