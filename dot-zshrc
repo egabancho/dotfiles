@@ -45,8 +45,8 @@ bindkey '^[w' kill-region
 # Delete not working for some reason
 bindkey  "^[[3~"  delete-char
 # Move word by word using Atl + left/right
-bindkey "[D" backward-word # ALT-left-arrow  ⌥ + ←
-bindkey "[C" forward-word  # ALT-right-arrow ⌥ + →
+bindkey "^[[1;3D" backward-word # ALT-left-arrow  ⌥ + ←
+bindkey "^[[1;3C" forward-word  # ALT-right-arrow ⌥ + →
 
 # History
 export HISTIGNORE="&:ls:ll:l:cd:[bf]g:exit:pwd:clear:[ \t]*"
