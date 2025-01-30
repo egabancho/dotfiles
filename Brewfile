@@ -77,8 +77,6 @@ brew "pinentry-mac"
 # Fonts
 cask "font-hack-nerd-font"
 
-
-
 cask "mattermost" # chat
 cask "1password"
 cask "alacritty"
@@ -107,5 +105,5 @@ brew "helm"
 cask "google-cloud-sdk"
 brew "pyenv"
 
-brew "koekeishiya/formulae/skhd"
-brew "koekeishiya/formulae/yabai"
+brew "FelixKratz/formulae/sketchybar"
+cask "nikitabobko/tap/aerospace"
