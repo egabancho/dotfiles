@@ -17,17 +17,22 @@ return {
         mason = true, -- Mason manage external tooling
       },
     },
+  },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    opts = { flavour = "frappe", transparent_background = true },
     config = function(_, opts)
       vim.o.termguicolors = true
-      vim.o.background = "dark"
-      require("solarized").setup(opts)
-      vim.cmd.colorscheme("solarized")
+      require("catppuccin").setup(opts)
+      vim.cmd.colorscheme "catppuccin"
     end,
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "solarized",
+      colorscheme = "catppuccin",
     },
   },
 }
