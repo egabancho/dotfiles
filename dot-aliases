@@ -131,6 +131,7 @@ alias now='date +"%T"'
 alias nowdate='date +"%d-%m-%Y"'
 alias t="tmux"
 alias ic='invenio-cli'
+alias c="clear"
 
 # For most of the cases Hub is a nice tool to use
 if type hub &> /dev/null; then
