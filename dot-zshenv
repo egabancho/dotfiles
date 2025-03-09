@@ -55,8 +55,6 @@ export PATH=$PATH:$HOME/.local/bin:$HOME/.scripts
 # Homebrew
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-. "$HOME/.cargo/env"
-
 # psql is a keg-only formula
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
