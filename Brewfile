@@ -29,7 +29,7 @@ brew "vim"
 brew "nano"
 brew "neovim"
 
-brew "stow" # dotfile management 
+brew "stow" # dotfile management
 brew "httpie" # HTTP client
 brew "fzf" # Command line fuzzy finder
 brew "jq" # JSON processort
@@ -100,10 +100,12 @@ cask "zoom" # Video conferencing
 
 brew "docker-compose"
 brew "kubernetes-cli" # kubectl
+brew "kubectx" # switch between clusters and namespaces in kubectl
 brew "kubeseal"
 brew "helm"
 cask "google-cloud-sdk"
 brew "pyenv"
 
 brew "FelixKratz/formulae/sketchybar"
+brew "FelixKratz/formulae/borders"
 cask "nikitabobko/tap/aerospace"
