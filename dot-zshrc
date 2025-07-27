@@ -108,3 +108,11 @@ source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 [ -f $HOME/.aliases ] && source $HOME/.aliases
 # Functions
 [ -f $HOME/.functions ] && source $HOME/.functions
+
+# pnpm
+export PNPM_HOME="/Users/egabancho/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
