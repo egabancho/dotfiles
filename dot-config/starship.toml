@@ -4,9 +4,6 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
-[directory]
-truncation_length = 8
-
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
 flamingo = "#f2cdcd"
@@ -34,3 +31,21 @@ surface0 = "#313244"
 base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
+
+[kubernetes]
+disabled = false
+detect_env_vars = ["_KUBERNETES"]
+
+[[kubernetes.contexts]]
+context_pattern = "gke_up-repositories_us-central1-c_cluster-2"
+style = "green"
+context_alias = "up-us"
+
+
+[[kubernetes.contexts]]
+context_pattern = "gke_up-repositories_asia-southeast1-b_repo-asia"
+style = "green"
+context_alias = "up-asia"
+
+[gcloud]
+symbol = '️🇬️ '
