@@ -79,7 +79,6 @@ cask "font-hack-nerd-font"
 
 cask "mattermost" # chat
 cask "1password"
-cask "alacritty"
 cask "wezterm"
 cask "appcleaner"
 cask "calibre" # ebook libra qqry
@@ -95,7 +94,6 @@ cask "obsidian"
 cask "docker"
 cask "rectangle" # Window manager
 cask "slack" # chat
-cask "visual-studio-code"
 cask "zoom" # Video conferencing
 
 brew "docker-compose"
@@ -103,6 +101,7 @@ brew "kubernetes-cli" # kubectl
 brew "kubectx" # switch between clusters and namespaces in kubectl
 brew "kubeseal"
 brew "helm"
+brew "kind" # tool for running local Kubernetes clusters using Docker container
 cask "google-cloud-sdk"
 brew "pyenv"
 
